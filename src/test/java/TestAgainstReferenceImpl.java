@@ -1,11 +1,11 @@
 import static at.gadermaier.argon2.Constants.Defaults.OUTLEN_DEF;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import at.gadermaier.argon2.Argon2;
 import at.gadermaier.argon2.model.Argon2Type;
@@ -54,7 +54,7 @@ public class TestAgainstReferenceImpl {
 		long timeHashComputation = System.currentTimeMillis();
 		logTime(timeReferenceHashComputation - base, timeHashComputation - timeReferenceHashComputation);
 
-		Assert.assertEquals("Hash differs.", referenceHash, hash);
+		assertThat(hash).isEqualTo(referenceHash);
 	}
 
 	private void logTime(long timeReferenceHashComputation, long timeHashComputation) {
