@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'rip.deadcode.argon2'
-version '0.1-SNAPSHOT'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -44,3 +44,10 @@ compileJava {
 compileTestJava {
     options.encoding = 'UTF-8'
 }
+
+task srcZip(type: Zip) {
+    classifier = 'src'
+    from sourceSets*.allSource
+}
+
+jar.dependsOn(srcZip)
