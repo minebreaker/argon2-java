@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'rip.deadcode.argon2'
-version '0.1-SNAPSHOT'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -15,13 +15,19 @@ repositories {
 dependencies {
     testCompile(
             'org.junit.jupiter:junit-jupiter-api:5.3.2',
+            'de.mkammerer:argon2-jvm:2.5',
             'com.google.truth:truth:0.42',
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+    		'org.junit.platform:junit-platform-launcher:1.1.0'
 //            'com.google.truth.extensions:truth-java8-extension:0.42',
 //            'org.mockito:mockito-core:2.23.4',
 //            'rip.deadcode:izvestia:0.2',
 //            'com.google.jimfs:jimfs:1.1'
     )
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
+    testRuntime(
+    		'org.junit.jupiter:junit-jupiter-engine:5.3.2',
+            'de.mkammerer:argon2-jvm:2.5'
+	)
 }
 
 test {
@@ -38,3 +44,10 @@ compileJava {
 compileTestJava {
     options.encoding = 'UTF-8'
 }
+
+task srcZip(type: Zip) {
+    classifier = 'src'
+    from sourceSets*.allSource
+}
+
+jar.dependsOn(srcZip)
